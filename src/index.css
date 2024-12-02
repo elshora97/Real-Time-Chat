@@ -45,4 +45,5 @@ body {
   border-radius: 12px;
   color: white;
   display: flex;
+  overflow-x: hidden;
 }
