@@ -15,7 +15,7 @@ const Chat = () => {
       <div className="top">
         <div className="user">
           <img
-            src="/public/avatar.png"
+            src="/avatar.png"
             alt=""
           />
           <div className="texts">
@@ -25,15 +25,15 @@ const Chat = () => {
         </div>
         <div className="icons">
           <img
-            src="/public/phone.png"
+            src="/phone.png"
             alt=""
           />
           <img
-            src="/public/video.png"
+            src="/video.png"
             alt=""
           />
           <img
-            src="/public/info.png"
+            src="/info.png"
             alt=""
           />
         </div>
@@ -42,7 +42,7 @@ const Chat = () => {
       <div className="center">
         <div className="message">
           <img
-            src="/public/avatar.png"
+            src="/avatar.png"
             alt="avatar"
           />
           <div className="texts">
@@ -64,7 +64,7 @@ const Chat = () => {
         </div>
         <div className="message">
           <img
-            src="/public/avatar.png"
+            src="/avatar.png"
             alt="avatar"
           />
           <div className="texts">
@@ -86,7 +86,7 @@ const Chat = () => {
         </div>
         <div className="message">
           <img
-            src="/public/avatar.png"
+            src="/avatar.png"
             alt="avatar"
           />
           <div className="texts">
@@ -102,15 +102,15 @@ const Chat = () => {
       <div className="bottom">
         <div className="icons">
           <img
-            src="/public/img.png"
+            src="/img.png"
             alt="img"
           />
           <img
-            src="/public/camera.png"
+            src="/camera.png"
             alt="camera"
           />
           <img
-            src="/public/mic.png"
+            src="/mic.png"
             alt="mic"
           />
         </div>
@@ -126,7 +126,7 @@ const Chat = () => {
 
         <div className="emoji">
           <img
-            src="/public/emoji.png"
+            src="/emoji.png"
             alt="emoji"
             onClick={() => setOpenEmoji((prev) => !prev)}
           />

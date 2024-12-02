@@ -8,7 +8,7 @@ const ChatList = () => {
       <div className="search">
         <div className="searchBar">
           <img
-            src="/public/search.png"
+            src="/search.png"
             alt="search"
           />
           <input
@@ -17,7 +17,7 @@ const ChatList = () => {
           />
         </div>
         <img
-          src={addMore ? "/public/minus.png" : "/public/plus.png"}
+          src={addMore ? "/minus.png" : "/plus.png"}
           alt="add"
           className="add"
           onClick={() => setAddMore((prev) => !prev)}
@@ -26,7 +26,7 @@ const ChatList = () => {
 
       <div className="item">
         <img
-          src="/public/avatar.png"
+          src="/avatar.png"
           alt="avatar"
         />
         <div className="texts">
@@ -37,7 +37,7 @@ const ChatList = () => {
 
       <div className="item">
         <img
-          src="/public/avatar.png"
+          src="/avatar.png"
           alt="avatar"
         />
         <div className="texts">

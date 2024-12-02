@@ -5,22 +5,22 @@ const UserInfo = () => {
     <div className="userInfo">
       <div className="user">
         <img
-          src="/public/avatar.png"
+          src="/avatar.png"
           alt="avatar"
         />
         <h2>john doe</h2>
       </div>
       <div className="icons">
         <img
-          src="/public/more.png"
+          src="/more.png"
           alt="more"
         />
         <img
-          src="/public/video.png"
+          src="/video.png"
           alt="video"
         />
         <img
-          src="/public/edit.png"
+          src="/edit.png"
           alt="edit"
         />
       </div>
