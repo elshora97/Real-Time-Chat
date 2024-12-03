@@ -4,12 +4,10 @@ import AddUser from "./adduser/AddUser";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
 import { userUserStore } from "../../../lib/userstore";
-import { set } from "firebase/database";
 
 const ChatList = () => {
   const [chats, setChats] = useState(false);
   const [addMore, setAddMore] = useState(false);
-
   const { currentUser } = userUserStore();
 
   useEffect(() => {
