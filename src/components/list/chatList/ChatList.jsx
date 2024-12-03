@@ -3,16 +3,16 @@ import "./chatList.css";
 import AddUser from "./adduser/AddUser";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
-import { userUserStore } from "../../../lib/userstore";
+import { useUserStore } from "../../../lib/userstore";
 
 const ChatList = () => {
-  const [chats, setChats] = useState(false);
+  const [chats, setChats] = useState([]);
   const [addMore, setAddMore] = useState(false);
-  const { currentUser } = userUserStore();
+  const { currentUser } = useUserStore();
 
   useEffect(() => {
     const unSub = onSnapshot(
-      doc(db, "userchats", currentUser.id),
+      doc(db, "userChats", currentUser.id),
       async (res) => {
         const items = res.data().chats;
 
@@ -26,6 +26,7 @@ const ChatList = () => {
 
         const chatData = await Promise.all(promises);
         setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+        console.log(chatData);
       }
     );
     return () => {
@@ -54,18 +55,20 @@ const ChatList = () => {
         />
       </div>
       {chats.map((chat) => {
-        <div
-          className="item"
-          key={chat.chatId}>
-          <img
-            src="/avatar.png"
-            alt="avatar"
-          />
-          <div className="texts">
-            <span>{chat.user.username}</span>
-            <p>{chat.lastMessage}</p>
+        return (
+          <div
+            className="item"
+            key={chat.chatId}>
+            <img
+              src="/avatar.png"
+              alt="avatar"
+            />
+            <div className="texts">
+              <span>{chat.user.username}</span>
+              <p>{chat.lastMessage}</p>
+            </div>
           </div>
-        </div>;
+        );
       })}
 
       {addMore && <AddUser setAddMore={setAddMore} />}

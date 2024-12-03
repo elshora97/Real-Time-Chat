@@ -45,11 +45,11 @@ const Login = () => {
         blocked: [],
       });
 
-      await setDoc(doc(db, "userchats", res.user.uid), {
+      await setDoc(doc(db, "userChats", res.user.uid), {
         chats: [],
       });
 
-      toast.success("Account Created, You can login now");
+      toast.success("Account Created");
       e.target.reset();
     } catch (error) {
       console.log(error.message);
@@ -70,6 +70,7 @@ const Login = () => {
         return;
       }
       await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Loged in");
       e.target.reset();
     } catch (error) {
       console.log(error.message);
