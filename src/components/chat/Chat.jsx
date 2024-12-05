@@ -1,19 +1,34 @@
 import { useEffect, useRef, useState } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../lib/firebase";
+import { useChatStore } from "../../lib/chatstore";
 const Chat = () => {
   const [openEmoji, setOpenEmoji] = useState(false);
   const [text, setText] = useState("");
+  const [chat, setChat] = useState([]);
   const endRef = useRef(null);
-
-  useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  const { chatId } = useChatStore();
 
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
     setOpenEmoji(false);
   };
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "chats", chatId), (res) => {
+      setChat(res.data());
+    });
+
+    return () => {
+      unsub();
+    };
+  }, [chatId]);
 
   return (
     <div className="chat">
@@ -45,85 +60,19 @@ const Chat = () => {
       </div>
 
       <div className="center">
-        <div className="message">
-          <img
-            src="/avatar.png"
-            alt="avatar"
-          />
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-              cupiditate.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message own">
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-              cupiditate.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message">
-          <img
-            src="/avatar.png"
-            alt="avatar"
-          />
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-              cupiditate.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message own">
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-              cupiditate.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message">
-          <img
-            src="/avatar.png"
-            alt="avatar"
-          />
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-              cupiditate.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message own">
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-              cupiditate.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message">
-          <img
-            src="/avatar.png"
-            alt="avatar"
-          />
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-              cupiditate.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
+        {chat?.messages?.map((message) => {
+          return (
+            <div
+              className="message own"
+              key={message?.createdAt}>
+              <div className="texts">
+                <p>{message.text}</p>
+                <span>1 min ago</span>
+              </div>
+            </div>
+          );
+        })}
+
         <div ref={endRef}></div>
       </div>
 
